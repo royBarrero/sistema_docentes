@@ -3,63 +3,62 @@
 namespace App\Http\Controllers;
 
 use App\Models\Grupo;
+use App\Models\Materia;
 use Illuminate\Http\Request;
 
 class GrupoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $grupos = Grupo::with('materia')->paginate(10);
+        return view('grupos.index', compact('grupos'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        $materias = Materia::pluck('nombre', 'id');
+        return view('grupos.create', compact('materias'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'materia_id' => 'required|exists:materias,id',
+            'nombre' => 'required|string|max:50|unique:grupos,nombre,NULL,id,materia_id,' . $request->materia_id,
+            'estado' => 'required|string|max:20',
+        ], [
+            'nombre.unique' => 'La materia seleccionada ya tiene un grupo con el mismo nombre.',
+        ]);
+
+        Grupo::create($request->all());
+
+        return redirect()->route('grupos.index')->with('success', 'Grupo creado correctamente.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Grupo $grupo)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Grupo $grupo)
     {
-        //
+        $materias = Materia::pluck('nombre', 'id');
+        return view('grupos.edit', compact('grupo', 'materias'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Grupo $grupo)
     {
-        //
+        $request->validate([
+            'materia_id' => 'required|exists:materias,id',
+            'nombre' => 'required|string|max:50|unique:grupos,nombre,' . $grupo->id . ',id,materia_id,' . $request->materia_id,
+            'estado' => 'required|string|max:20',
+        ], [
+            'nombre.unique' => 'La materia seleccionada ya tiene un grupo con el mismo nombre.',
+        ]);
+
+        $grupo->update($request->all());
+
+        return redirect()->route('grupos.index')->with('success', 'Grupo actualizado correctamente.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Grupo $grupo)
     {
-        //
+        $grupo->delete();
+        return redirect()->route('grupos.index')->with('success', 'Grupo eliminado correctamente.');
     }
 }

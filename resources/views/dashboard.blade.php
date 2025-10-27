@@ -13,7 +13,7 @@
                     <i class="bi bi-people-fill fs-1 text-primary"></i>
                     <h5 class="card-title mt-3">Roles</h5>
                     <p class="card-text text-muted">Gestiona los roles del sistema</p>
-                    <a href="{{ url('/roles') }}" class="btn btn-outline-primary btn-sm">Ver módulo</a>
+                    <a href="{{ route('roles.index') }}" class="btn btn-outline-primary">Ver módulo</a>
                 </div>
             </div>
         </div>
@@ -25,7 +25,7 @@
                     <i class="bi bi-person-badge-fill fs-1 text-success"></i>
                     <h5 class="card-title mt-3">Docentes</h5>
                     <p class="card-text text-muted">Registra y administra docentes</p>
-                    <a href="#" class="btn btn-outline-success btn-sm">Ver módulo</a>
+                    <a href="{{ route('docentes.index') }}" class="btn btn-success">Ver módulo</a>
                 </div>
             </div>
         </div>
@@ -37,7 +37,7 @@
                     <i class="bi bi-journal-bookmark-fill fs-1 text-warning"></i>
                     <h5 class="card-title mt-3">Materias</h5>
                     <p class="card-text text-muted">Gestiona las materias de cada gestión</p>
-                    <a href="#" class="btn btn-outline-warning btn-sm">Ver módulo</a>
+                   <a href="{{ route('materias.index') }}" class="btn btn-warning text-dark">Ver módulo</a>
                 </div>
             </div>
         </div>
@@ -49,7 +49,7 @@
                     <i class="bi bi-people fs-1 text-info"></i>
                     <h5 class="card-title mt-3">Grupos</h5>
                     <p class="card-text text-muted">Administra grupos y paralelos</p>
-                    <a href="#" class="btn btn-outline-info btn-sm">Ver módulo</a>
+                    <a href="{{ route('grupos.index') }}" class="btn btn-warning text-dark">Ver módulo</a>
                 </div>
             </div>
         </div>
@@ -61,7 +61,7 @@
                     <i class="bi bi-door-open-fill fs-1 text-danger"></i>
                     <h5 class="card-title mt-3">Aulas</h5>
                     <p class="card-text text-muted">Gestiona las aulas de la facultad</p>
-                    <a href="#" class="btn btn-outline-danger btn-sm">Ver módulo</a>
+                    <a href="{{ route('aulas.index') }}" class="btn btn-warning text-dark">Ver módulo</a>
                 </div>
             </div>
         </div>

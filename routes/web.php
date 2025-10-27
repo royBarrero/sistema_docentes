@@ -24,7 +24,16 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('roles', RolController::class);
     //CRUD de docentes 
     Route::resource('docentes', App\Http\Controllers\DocenteController::class);
-    
+    //CRUD DE MATERIAS
+    Route::resource('materias', App\Http\Controllers\MateriaController::class);
+    //CRUD DE GRUPOS
+    Route::resource('grupos', App\Http\Controllers\GrupoController::class);
+    //CRUD DE AULAS
+    Route::resource('aulas', App\Http\Controllers\AulaController::class);
+
+
+
+
 
 });
 
