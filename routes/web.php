@@ -16,10 +16,12 @@ Route::get('/', function () {
 
 // Rutas protegidas por autenticación
 Route::middleware(['auth'])->group(function () {
+    
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-
+        // CRUD de Usuarios
+    Route::resource('usuarios', App\Http\Controllers\UsuarioController::class);
     // CRUD de Roles
     Route::resource('roles', RolController::class);
     //CRUD de docentes 
@@ -30,6 +32,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('grupos', App\Http\Controllers\GrupoController::class);
     //CRUD DE AULAS
     Route::resource('aulas', App\Http\Controllers\AulaController::class);
+    
 
 
 
