@@ -17,5 +17,12 @@ class Aula extends Model
         'ubicacion',
         'tipo',
         'estado',
+        'telefono',
     ];
+
+    // Relación con Horarios
+    public function horarios()
+    {
+        return $this->hasMany(Horario::class, 'aula_id');
+    }
 }

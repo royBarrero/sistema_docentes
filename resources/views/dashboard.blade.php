@@ -1,11 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container py-4">
-        <h2 class="mb-4 text-center fw-bold">Panel Principal</h2>
-        <p class="text-center text-muted mb-5">Bienvenido al sistema de gestión docente</p>
+<div class="container py-4">
+    <h2 class="mb-4 text-center fw-bold">Panel Principal</h2>
+    <p class="text-center text-muted mb-5">Bienvenido al sistema de gestión docente</p>
 
-        <div class="row g-4 justify-content-center">
+    <div class="row g-4 justify-content-center">
+        
+        {{-- Solo mostrar si es Administrador --}}
+        @if(auth()->user()->rol->nombre == 'Administrador')
             <!-- Tarjeta Roles -->
             <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                 <div class="card shadow-sm h-100 border-0">
@@ -14,6 +17,18 @@
                         <h5 class="card-title mt-3">Roles</h5>
                         <p class="card-text text-muted">Gestiona los roles del sistema</p>
                         <a href="{{ route('roles.index') }}" class="btn btn-outline-primary">Ver módulo</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tarjeta Usuarios -->
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="card shadow-sm h-100 border-0">
+                    <div class="card-body text-center">
+                        <i class="bi bi-person-circle fs-1 text-secondary"></i>
+                        <h5 class="card-title mt-3">Usuarios</h5>
+                        <p class="card-text text-muted">Administra usuarios del sistema</p>
+                        <a href="{{ route('usuarios.index') }}" class="btn btn-warning text-dark">Ver módulo</a>
                     </div>
                 </div>
             </div>
@@ -65,17 +80,46 @@
                     </div>
                 </div>
             </div>
-            <!-- Tarjeta Usuarios -->
+        @endif
+
+        {{-- Solo mostrar si es Docente --}}
+        @if(auth()->user()->rol->nombre == 'Docente')
+            <!-- Tarjeta Mi Horario -->
             <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                 <div class="card shadow-sm h-100 border-0">
                     <div class="card-body text-center">
-                        <i class="bi bi-person-circle fs-1 text-secondary"></i>
-                        <h5 class="card-title mt-3">Usuarios</h5>
-                        <p class="card-text text-muted">Administra usuarios del sistema</p>
-                        <a href="{{ route('usuarios.index') }}" class="btn btn-warning text-dark">Ver módulo</a>
+                        <i class="bi bi-calendar-check fs-1 text-success"></i>
+                        <h5 class="card-title mt-3">Mi Horario</h5>
+                        <p class="card-text text-muted">Consulta tu horario de clases</p>
+                        <a href="{{ route('docente.horario') }}" class="btn btn-success">Ver horario</a>
                     </div>
                 </div>
             </div>
-        </div>
+
+            <!-- Tarjeta Asistencia -->
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="card shadow-sm h-100 border-0">
+                    <div class="card-body text-center">
+                        <i class="bi bi-clipboard-check fs-1 text-primary"></i>
+                        <h5 class="card-title mt-3">Asistencia</h5>
+                        <p class="card-text text-muted">Registra tu asistencia</p>
+                        <a href="{{ route('docente.asistencia') }}" class="btn btn-primary">Marcar asistencia</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tarjeta Historial -->
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="card shadow-sm h-100 border-0">
+                    <div class="card-body text-center">
+                        <i class="bi bi-clock-history fs-1 text-info"></i>
+                        <h5 class="card-title mt-3">Historial</h5>
+                        <p class="card-text text-muted">Ver asistencias anteriores</p>
+                        <a href="{{ route('docente.historial') }}" class="btn btn-info">Ver historial</a>
+                    </div>
+                </div>
+            </div>
+        @endif
     </div>
+</div>
 @endsection

@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class GestionAcademica extends Model
 {
-    //
+    
     use HasFactory;
 
-    // 👇 Este es el cambio importante
+    
     protected $table = 'gestiones_academicas';
 }

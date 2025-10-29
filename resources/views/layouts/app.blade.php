@@ -24,24 +24,73 @@
 
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
+                    <!-- Dashboard visible para todos -->
                     <li class="nav-item">
                         <a class="nav-link {{ request()->is('dashboard') ? 'active' : '' }}"
                             href="{{ url('/dashboard') }}">
                             Dashboard
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->is('roles*') ? 'active' : '' }}" href="{{ url('/roles') }}">
-                            Roles
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->is('docentes*') ? 'active' : '' }}"
-                            href="{{ url('/docentes') }}">
-                            Gestionar Docentes
-                        </a>
-                    </li>
 
+                    {{-- Menú solo para Administrador --}}
+                    @if(Auth::check() && Auth::user()->rol && Auth::user()->rol->nombre == 'Administrador')
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->is('roles*') ? 'active' : '' }}" href="{{ url('/roles') }}">
+                                Roles
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->is('usuarios*') ? 'active' : '' }}" href="{{ url('/usuarios') }}">
+                                Usuarios
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->is('docentes*') ? 'active' : '' }}"
+                                href="{{ url('/docentes') }}">
+                                Gestionar Docentes
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->is('materias*') ? 'active' : '' }}"
+                                href="{{ url('/materias') }}">
+                                Materias
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->is('grupos*') ? 'active' : '' }}"
+                                href="{{ url('/grupos') }}">
+                                Grupos
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->is('aulas*') ? 'active' : '' }}"
+                                href="{{ url('/aulas') }}">
+                                Aulas
+                            </a>
+                        </li>
+                    @endif
+
+                    {{-- Menú solo para Docente --}}
+                    @if(Auth::check() && Auth::user()->rol && Auth::user()->rol->nombre == 'Docente')
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->is('docente/mi-horario*') ? 'active' : '' }}"
+                                href="{{ route('docente.horario') }}">
+                                Mi Horario
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->is('docente/asistencia*') ? 'active' : '' }}"
+                                href="{{ route('docente.asistencia') }}">
+                                Asistencia
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->is('docente/historial*') ? 'active' : '' }}"
+                                href="{{ route('docente.historial') }}">
+                                Historial
+                            </a>
+                        </li>
+                    @endif
                 </ul>
 
                 <!-- Usuario y logout -->
@@ -53,7 +102,18 @@
                             {{ Auth::user()->nombre_completo ?? 'Usuario' }}
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                            <li><a class="dropdown-item" href="{{ url('/profile') }}">Perfil</a></li>
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <i class="bi bi-person"></i> Perfil
+                                </a>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <span class="dropdown-item-text small text-muted">
+                                    Rol: {{ Auth::user()->rol->nombre ?? 'Sin rol' }}
+                                </span>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
                             <li>
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf

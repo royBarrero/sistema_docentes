@@ -17,7 +17,6 @@ class Grupo extends Model
         'estado',
     ];
 
-    // Relación: un grupo pertenece a una materia
     public function materia()
     {
         return $this->belongsTo(Materia::class, 'materia_id');

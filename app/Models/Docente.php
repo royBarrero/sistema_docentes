@@ -13,18 +13,33 @@ class Docente extends Model
 
     protected $fillable = [
         'usuario_id',
-    'ci',
-    'nombre',
-    'apellidos',
-    'titulo',
-    'especialidad',
-    'correo_institucional',
-    'telefono',
-    'estado',
+        'ci',
+        'titulo',
+        'especialidad',
+        'correo_institucional',
+        'telefono',
+        'estado',
     ];
-    public function usuario()
-{
-    return $this->belongsTo(Usuario::class, 'usuario_id');
-}
 
+    // Relación con Usuario
+    public function usuario()
+    {
+        return $this->belongsTo(Usuario::class, 'usuario_id');
+    }
+
+    // Relación con Horarios
+    public function horarios()
+    {
+        return $this->hasMany(Horario::class, 'docente_id');
+    }
+
+    // Horarios de la gestión actual
+    public function horariosActuales()
+    {
+        return $this->hasMany(Horario::class, 'docente_id')
+                    ->where('estado', 'Activo')
+                    ->whereHas('gestion', function($query) {
+                        $query->where('estado', 'Activo');
+                    });
+    }
 }

@@ -10,10 +10,10 @@ class Usuario extends Authenticatable
 {
     use Notifiable, HasFactory;
 
-    // Nombre real de la tabla
+  
     protected $table = 'usuarios';
 
-    // Campos que se pueden asignar en masa
+    
     protected $fillable = [
         'nombre_completo',
         'email',
@@ -35,7 +35,11 @@ class Usuario extends Authenticatable
     {
         return $this->password_hash;
     }
-
+    // Relación con Docente
+    public function docente()
+    {
+        return $this->hasOne(Docente::class, 'usuario_id');
+    }
     // Relación con Rol
     public function rol()
     {

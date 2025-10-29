@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Models\Usuario;
+use App\Models\Rol;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -30,20 +31,31 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'nombre_completo' => ['required', 'string', 'max:120'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:120', 'unique:usuarios,email'],
+            'telefono' => ['nullable', 'string', 'max:30'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
+        // Buscar el rol "Docente"
+        $rolDocente = Rol::where('nombre', 'Docente')->first();
+        
+        if (!$rolDocente) {
+            return back()->withErrors(['role_id' => 'El rol Docente no existe en el sistema. Contacte al administrador.']);
+        }
+
+        $usuario = Usuario::create([
+            'nombre_completo' => $request->nombre_completo,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'telefono' => $request->telefono,
+            'password_hash' => Hash::make($request->password),
+            'role_id' => $rolDocente->id,
+            'estado' => 'Activo',
         ]);
 
-        event(new Registered($user));
+        event(new Registered($usuario));
 
-        Auth::login($user);
+        Auth::login($usuario);
 
         return redirect(route('dashboard', absolute: false));
     }
