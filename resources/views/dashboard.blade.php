@@ -14,7 +14,6 @@
                 <i class="bi bi-shield-lock"></i> Autenticación y Seguridad
             </h4>
             <div class="row g-4">
-                <!-- Tarjeta Usuarios -->
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                     <div class="card shadow-sm h-100 border-0 hover-card">
                         <div class="card-body text-center">
@@ -28,7 +27,6 @@
                     </div>
                 </div>
 
-                <!-- Tarjeta Roles -->
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                     <div class="card shadow-sm h-100 border-0 hover-card">
                         <div class="card-body text-center">
@@ -50,7 +48,6 @@
                 <i class="bi bi-book"></i> Gestión Académica
             </h4>
             <div class="row g-4">
-                <!-- Tarjeta Docentes -->
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                     <div class="card shadow-sm h-100 border-0 hover-card">
                         <div class="card-body text-center">
@@ -64,7 +61,6 @@
                     </div>
                 </div>
 
-                <!-- Tarjeta Materias -->
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                     <div class="card shadow-sm h-100 border-0 hover-card">
                         <div class="card-body text-center">
@@ -78,7 +74,6 @@
                     </div>
                 </div>
 
-                <!-- Tarjeta Grupos -->
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                     <div class="card shadow-sm h-100 border-0 hover-card">
                         <div class="card-body text-center">
@@ -92,7 +87,6 @@
                     </div>
                 </div>
 
-                <!-- Tarjeta Aulas -->
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                     <div class="card shadow-sm h-100 border-0 hover-card">
                         <div class="card-body text-center">
@@ -114,7 +108,6 @@
                 <i class="bi bi-calendar-check"></i> Asignación Académica
             </h4>
             <div class="row g-4">
-                <!-- Tarjeta Asignar Docentes -->
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                     <div class="card shadow-sm h-100 border-0 hover-card bg-light">
                         <div class="card-body text-center">
@@ -128,7 +121,6 @@
                     </div>
                 </div>
 
-                <!-- Tarjeta Generar Horarios -->
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                     <div class="card shadow-sm h-100 border-0 hover-card bg-light">
                         <div class="card-body text-center">
@@ -150,7 +142,6 @@
                 <i class="bi bi-file-earmark-bar-graph"></i> Reportes
             </h4>
             <div class="row g-4">
-                <!-- Tarjeta Reportes -->
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                     <div class="card shadow-sm h-100 border-0 hover-card bg-light">
                         <div class="card-body text-center">
@@ -167,6 +158,220 @@
         </div>
     @endif
 
+    {{-- Dashboard para Coordinador --}}
+    @if(auth()->user()->rol->nombre == 'Coordinador')
+        
+        {{-- 📦 Gestión Académica --}}
+        <div class="mb-5">
+            <h4 class="mb-3 text-success">
+                <i class="bi bi-book"></i> Gestión Académica
+            </h4>
+            <div class="row g-4">
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <div class="card shadow-sm h-100 border-0 hover-card">
+                        <div class="card-body text-center">
+                            <i class="bi bi-person-badge fs-1 text-success"></i>
+                            <h5 class="card-title mt-3">Docentes</h5>
+                            <p class="card-text text-muted small">Ver docentes</p>
+                            <a href="{{ route('coordinador.docentes') }}" class="btn btn-sm btn-outline-success">
+                                <i class="bi bi-eye"></i> Ver
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <div class="card shadow-sm h-100 border-0 hover-card">
+                        <div class="card-body text-center">
+                            <i class="bi bi-journal-bookmark fs-1 text-warning"></i>
+                            <h5 class="card-title mt-3">Materias</h5>
+                            <p class="card-text text-muted small">Ver materias</p>
+                            <a href="{{ route('coordinador.materias') }}" class="btn btn-sm btn-outline-warning">
+                                <i class="bi bi-eye"></i> Ver
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <div class="card shadow-sm h-100 border-0 hover-card">
+                        <div class="card-body text-center">
+                            <i class="bi bi-people fs-1 text-info"></i>
+                            <h5 class="card-title mt-3">Grupos</h5>
+                            <p class="card-text text-muted small">Ver grupos</p>
+                            <a href="{{ route('coordinador.grupos') }}" class="btn btn-sm btn-outline-info">
+                                <i class="bi bi-eye"></i> Ver
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <div class="card shadow-sm h-100 border-0 hover-card">
+                        <div class="card-body text-center">
+                            <i class="bi bi-door-open fs-1 text-danger"></i>
+                            <h5 class="card-title mt-3">Aulas</h5>
+                            <p class="card-text text-muted small">Ver aulas</p>
+                            <a href="{{ route('coordinador.aulas') }}" class="btn btn-sm btn-outline-danger">
+                                <i class="bi bi-eye"></i> Ver
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- 📦 Asignación Académica --}}
+        <div class="mb-5">
+            <h4 class="mb-3 text-primary">
+                <i class="bi bi-calendar-check"></i> Asignación Académica
+            </h4>
+            <div class="row g-4">
+                <div class="col-12 col-sm-6 col-md-4">
+                    <div class="card shadow-sm h-100 border-0 hover-card">
+                        <div class="card-body text-center">
+                            <i class="bi bi-link-45deg fs-1 text-primary"></i>
+                            <h5 class="card-title mt-3">Asignar Docentes</h5>
+                            <p class="card-text text-muted">Asignar docente a materia y grupo</p>
+                            <a href="{{ route('coordinador.asignaciones') }}" class="btn btn-primary">
+                                <i class="bi bi-plus-circle"></i> Gestionar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-4">
+                    <div class="card shadow-sm h-100 border-0 hover-card">
+                        <div class="card-body text-center">
+                            <i class="bi bi-calendar3 fs-1 text-success"></i>
+                            <h5 class="card-title mt-3">Generar Horarios</h5>
+                            <p class="card-text text-muted">Validar conflictos de horario</p>
+                            <a href="{{ route('coordinador.horarios') }}" class="btn btn-success">
+                                <i class="bi bi-calendar-plus"></i> Gestionar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-4">
+                    <div class="card shadow-sm h-100 border-0 hover-card">
+                        <div class="card-body text-center">
+                            <i class="bi bi-clipboard-check fs-1 text-warning"></i>
+                            <h5 class="card-title mt-3">Control Asistencia</h5>
+                            <p class="card-text text-muted">Registrar y controlar asistencia</p>
+                            <a href="{{ route('coordinador.asistencia') }}" class="btn btn-warning">
+                                <i class="bi bi-check-circle"></i> Gestionar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- 📦 Reportes --}}
+        <div class="mb-5">
+            <h4 class="mb-3 text-info">
+                <i class="bi bi-file-earmark-bar-graph"></i> Reportes
+            </h4>
+            <div class="row g-4">
+                <div class="col-12 col-sm-6 col-md-4">
+                    <div class="card shadow-sm h-100 border-0 hover-card">
+                        <div class="card-body text-center">
+                            <i class="bi bi-file-earmark-pdf fs-1 text-info"></i>
+                            <h5 class="card-title mt-3">Reportes Parciales</h5>
+                            <p class="card-text text-muted">Generar reportes operativos</p>
+                            <a href="{{ route('coordinador.reportes') }}" class="btn btn-info">
+                                <i class="bi bi-file-earmark-text"></i> Ver reportes
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
+    {{-- Dashboard para Autoridad --}}
+    @if(auth()->user()->rol->nombre == 'Autoridad')
+        
+        <div class="alert alert-info text-center mb-5">
+            <i class="bi bi-info-circle fs-4"></i>
+            <p class="mb-0 mt-2">Acceso de <strong>solo lectura</strong> a la información académica</p>
+        </div>
+
+        {{-- 📦 Consultas --}}
+        <div class="mb-5">
+            <h4 class="mb-3 text-primary">
+                <i class="bi bi-eye"></i> Consultas
+            </h4>
+            <div class="row g-4">
+                <div class="col-12 col-sm-6 col-md-4">
+                    <div class="card shadow-sm h-100 border-0 hover-card">
+                        <div class="card-body text-center">
+                            <i class="bi bi-person-lines-fill fs-1 text-success"></i>
+                            <h5 class="card-title mt-3">Lista de Docentes</h5>
+                            <p class="card-text text-muted">Ver información de docentes</p>
+                            <a href="{{ route('autoridad.docentes') }}" class="btn btn-success">
+                                <i class="bi bi-eye"></i> Ver lista
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-4">
+                    <div class="card shadow-sm h-100 border-0 hover-card">
+                        <div class="card-body text-center">
+                            <i class="bi bi-calendar3 fs-1 text-primary"></i>
+                            <h5 class="card-title mt-3">Horarios</h5>
+                            <p class="card-text text-muted">Consultar horarios académicos</p>
+                            <a href="{{ route('autoridad.horarios') }}" class="btn btn-primary">
+                                <i class="bi bi-eye"></i> Ver horarios
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-4">
+                    <div class="card shadow-sm h-100 border-0 hover-card">
+                        <div class="card-body text-center">
+                            <i class="bi bi-clipboard-check fs-1 text-info"></i>
+                            <h5 class="card-title mt-3">Historial Asistencias</h5>
+                            <p class="card-text text-muted">Ver registro de asistencias</p>
+                            <a href="{{ route('autoridad.asistencias') }}" class="btn btn-info">
+                                <i class="bi bi-eye"></i> Ver historial
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-4">
+                    <div class="card shadow-sm h-100 border-0 hover-card">
+                        <div class="card-body text-center">
+                            <i class="bi bi-exclamation-triangle fs-1 text-danger"></i>
+                            <h5 class="card-title mt-3">Faltas</h5>
+                            <p class="card-text text-muted">Ver ausencias de docentes</p>
+                            <a href="{{ route('autoridad.faltas') }}" class="btn btn-danger">
+                                <i class="bi bi-eye"></i> Ver faltas
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-4">
+                    <div class="card shadow-sm h-100 border-0 hover-card">
+                        <div class="card-body text-center">
+                            <i class="bi bi-file-earmark-bar-graph fs-1 text-warning"></i>
+                            <h5 class="card-title mt-3">Reportes</h5>
+                            <p class="card-text text-muted">Generar reportes completos</p>
+                            <a href="{{ route('autoridad.reportes') }}" class="btn btn-warning">
+                                <i class="bi bi-file-earmark-pdf"></i> Ver reportes
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
     {{-- Dashboard para Docente --}}
     @if(auth()->user()->rol->nombre == 'Docente')
         {{-- 📦 Paquete 4: Control de Asistencia --}}
@@ -175,7 +380,6 @@
                 <i class="bi bi-clipboard-check"></i> Control de Asistencia
             </h4>
             <div class="row g-4 justify-content-center">
-                <!-- Tarjeta Mi Horario -->
                 <div class="col-12 col-sm-6 col-md-4">
                     <div class="card shadow-sm h-100 border-0 hover-card">
                         <div class="card-body text-center">
@@ -189,7 +393,6 @@
                     </div>
                 </div>
 
-                <!-- Tarjeta Asistencia -->
                 <div class="col-12 col-sm-6 col-md-4">
                     <div class="card shadow-sm h-100 border-0 hover-card">
                         <div class="card-body text-center">
@@ -203,7 +406,6 @@
                     </div>
                 </div>
 
-                <!-- Tarjeta Historial -->
                 <div class="col-12 col-sm-6 col-md-4">
                     <div class="card shadow-sm h-100 border-0 hover-card">
                         <div class="card-body text-center">

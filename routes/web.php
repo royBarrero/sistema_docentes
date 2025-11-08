@@ -25,7 +25,33 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('grupos', App\Http\Controllers\GrupoController::class);
         Route::resource('aulas', App\Http\Controllers\AulaController::class);
     });
+ // ========== RUTAS PARA COORDINADOR ==========
+    Route::middleware(['role:Coordinador'])->group(function () {
+        // Gestión Académica
+        Route::get('/coordinador/docentes', [App\Http\Controllers\CoordinadorController::class, 'docentes'])->name('coordinador.docentes');
+        Route::get('/coordinador/materias', [App\Http\Controllers\CoordinadorController::class, 'materias'])->name('coordinador.materias');
+        Route::get('/coordinador/grupos', [App\Http\Controllers\CoordinadorController::class, 'grupos'])->name('coordinador.grupos');
+        Route::get('/coordinador/aulas', [App\Http\Controllers\CoordinadorController::class, 'aulas'])->name('coordinador.aulas');
+        
+        // Asignación Académica
+        Route::get('/coordinador/asignaciones', [App\Http\Controllers\CoordinadorController::class, 'asignaciones'])->name('coordinador.asignaciones');
+        Route::get('/coordinador/horarios', [App\Http\Controllers\CoordinadorController::class, 'horarios'])->name('coordinador.horarios');
+        
+        // Control de Asistencia
+        Route::get('/coordinador/asistencia', [App\Http\Controllers\CoordinadorController::class, 'asistencia'])->name('coordinador.asistencia');
+        
+        // Reportes Parciales
+        Route::get('/coordinador/reportes', [App\Http\Controllers\CoordinadorController::class, 'reportes'])->name('coordinador.reportes');
+    });
 
+    // ========== RUTAS PARA AUTORIDAD (SOLO LECTURA) ==========
+    Route::middleware(['role:Autoridad'])->group(function () {
+        Route::get('/autoridad/docentes', [App\Http\Controllers\AutoridadController::class, 'docentes'])->name('autoridad.docentes');
+        Route::get('/autoridad/horarios', [App\Http\Controllers\AutoridadController::class, 'horarios'])->name('autoridad.horarios');
+        Route::get('/autoridad/asistencias', [App\Http\Controllers\AutoridadController::class, 'asistencias'])->name('autoridad.asistencias');
+        Route::get('/autoridad/faltas', [App\Http\Controllers\AutoridadController::class, 'faltas'])->name('autoridad.faltas');
+        Route::get('/autoridad/reportes', [App\Http\Controllers\AutoridadController::class, 'reportes'])->name('autoridad.reportes');
+    });
     // Rutas para DOCENTES
     Route::middleware(['role:Docente'])->group(function () {
         Route::get('/docente/mi-horario', [DocenteDashboardController::class, 'miHorario'])->name('docente.horario');
