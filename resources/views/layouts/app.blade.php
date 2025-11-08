@@ -28,67 +28,238 @@
                     <li class="nav-item">
                         <a class="nav-link {{ request()->is('dashboard') ? 'active' : '' }}"
                             href="{{ url('/dashboard') }}">
-                            Dashboard
+                            <i class="bi bi-house-door"></i> Dashboard
                         </a>
                     </li>
 
-                    {{-- Menú solo para Administrador --}}
+                    {{-- ========== MENÚ PARA ADMINISTRADOR ========== --}}
                     @if(Auth::check() && Auth::user()->rol && Auth::user()->rol->nombre == 'Administrador')
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->is('roles*') ? 'active' : '' }}" href="{{ url('/roles') }}">
-                                Roles
+                        
+                        {{-- 📦 1. Seguridad --}}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle {{ request()->is('usuarios*') || request()->is('roles*') ? 'active' : '' }}" 
+                               href="#" id="authDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-shield-lock"></i> Seguridad
                             </a>
+                            <ul class="dropdown-menu" aria-labelledby="authDropdown">
+                                <li>
+                                    <a class="dropdown-item {{ request()->is('usuarios*') ? 'active' : '' }}" 
+                                       href="{{ url('/usuarios') }}">
+                                        <i class="bi bi-person-circle"></i> Usuarios
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item {{ request()->is('roles*') ? 'active' : '' }}" 
+                                       href="{{ url('/roles') }}">
+                                        <i class="bi bi-people-fill"></i> Roles
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->is('usuarios*') ? 'active' : '' }}" href="{{ url('/usuarios') }}">
-                                Usuarios
+
+                        {{-- 📦 2. Gestión Académica --}}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle {{ request()->is('docentes*') || request()->is('materias*') || request()->is('grupos*') || request()->is('aulas*') ? 'active' : '' }}" 
+                               href="#" id="academicDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-book"></i> Gestión Académica
                             </a>
+                            <ul class="dropdown-menu" aria-labelledby="academicDropdown">
+                                <li>
+                                    <a class="dropdown-item {{ request()->is('docentes*') ? 'active' : '' }}" 
+                                       href="{{ url('/docentes') }}">
+                                        <i class="bi bi-person-badge"></i> Docentes
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item {{ request()->is('materias*') ? 'active' : '' }}" 
+                                       href="{{ url('/materias') }}">
+                                        <i class="bi bi-journal-bookmark"></i> Materias
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item {{ request()->is('grupos*') ? 'active' : '' }}" 
+                                       href="{{ url('/grupos') }}">
+                                        <i class="bi bi-people"></i> Grupos
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item {{ request()->is('aulas*') ? 'active' : '' }}" 
+                                       href="{{ url('/aulas') }}">
+                                        <i class="bi bi-door-open"></i> Aulas
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->is('docentes*') ? 'active' : '' }}"
-                                href="{{ url('/docentes') }}">
-                                Gestionar Docentes
+
+                        {{-- 📦 3. Asignación Académica --}}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle {{ request()->is('asignaciones*') || request()->is('horarios*') ? 'active' : '' }}" 
+                               href="#" id="assignDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-calendar-check"></i> Asignaciones
                             </a>
+                            <ul class="dropdown-menu" aria-labelledby="assignDropdown">
+                                <li>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="bi bi-link-45deg"></i> Asignar Docentes
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="bi bi-calendar3"></i> Generar Horarios
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
+
+                        {{-- 📦 5. Reportes --}}
                         <li class="nav-item">
-                            <a class="nav-link {{ request()->is('materias*') ? 'active' : '' }}"
-                                href="{{ url('/materias') }}">
-                                Materias
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->is('grupos*') ? 'active' : '' }}"
-                                href="{{ url('/grupos') }}">
-                                Grupos
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->is('aulas*') ? 'active' : '' }}"
-                                href="{{ url('/aulas') }}">
-                                Aulas
+                            <a class="nav-link {{ request()->is('reportes*') ? 'active' : '' }}" 
+                               href="#">
+                                <i class="bi bi-file-earmark-bar-graph"></i> Reportes
                             </a>
                         </li>
                     @endif
 
-                    {{-- Menú solo para Docente --}}
+                    {{-- ========== MENÚ PARA COORDINADOR ========== --}}
+                    @if(Auth::check() && Auth::user()->rol && Auth::user()->rol->nombre == 'Coordinador')
+                        
+                        {{-- 📦 Gestión Académica --}}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle {{ request()->is('coordinador/docentes*') || request()->is('coordinador/materias*') || request()->is('coordinador/grupos*') || request()->is('coordinador/aulas*') ? 'active' : '' }}" 
+                               href="#" id="coordAcademicDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-book"></i> Gestión Académica
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="coordAcademicDropdown">
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('coordinador.docentes') }}">
+                                        <i class="bi bi-person-badge"></i> Docentes
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('coordinador.materias') }}">
+                                        <i class="bi bi-journal-bookmark"></i> Materias
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('coordinador.grupos') }}">
+                                        <i class="bi bi-people"></i> Grupos
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('coordinador.aulas') }}">
+                                        <i class="bi bi-door-open"></i> Aulas
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        {{-- 📦 Asignación Académica --}}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle {{ request()->is('coordinador/asignaciones*') || request()->is('coordinador/horarios*') || request()->is('coordinador/asistencia*') ? 'active' : '' }}" 
+                               href="#" id="coordAssignDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-calendar-check"></i> Asignaciones
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="coordAssignDropdown">
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('coordinador.asignaciones') }}">
+                                        <i class="bi bi-link-45deg"></i> Asignar Docentes
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('coordinador.horarios') }}">
+                                        <i class="bi bi-calendar3"></i> Generar Horarios
+                                    </a>
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('coordinador.asistencia') }}">
+                                        <i class="bi bi-clipboard-check"></i> Control Asistencia
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        {{-- 📦 Reportes --}}
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->is('coordinador/reportes*') ? 'active' : '' }}" 
+                               href="{{ route('coordinador.reportes') }}">
+                                <i class="bi bi-file-earmark-bar-graph"></i> Reportes
+                            </a>
+                        </li>
+                    @endif
+
+                    {{-- ========== MENÚ PARA AUTORIDAD ========== --}}
+                    @if(Auth::check() && Auth::user()->rol && Auth::user()->rol->nombre == 'Autoridad')
+                        
+                        {{-- 📦 Consultas --}}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle {{ request()->is('autoridad/*') ? 'active' : '' }}" 
+                               href="#" id="autoridadDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-eye"></i> Consultas
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="autoridadDropdown">
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('autoridad.docentes') }}">
+                                        <i class="bi bi-person-lines-fill"></i> Lista de Docentes
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('autoridad.horarios') }}">
+                                        <i class="bi bi-calendar3"></i> Horarios
+                                    </a>
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('autoridad.asistencias') }}">
+                                        <i class="bi bi-clipboard-check"></i> Historial Asistencias
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('autoridad.faltas') }}">
+                                        <i class="bi bi-exclamation-triangle"></i> Faltas
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        {{-- 📦 Reportes --}}
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->is('autoridad/reportes*') ? 'active' : '' }}" 
+                               href="{{ route('autoridad.reportes') }}">
+                                <i class="bi bi-file-earmark-bar-graph"></i> Reportes
+                            </a>
+                        </li>
+                    @endif
+
+                    {{-- ========== MENÚ PARA DOCENTE ========== --}}
                     @if(Auth::check() && Auth::user()->rol && Auth::user()->rol->nombre == 'Docente')
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->is('docente/mi-horario*') ? 'active' : '' }}"
-                                href="{{ route('docente.horario') }}">
-                                Mi Horario
+                        
+                        {{-- 📦 Mi Asistencia --}}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle {{ request()->is('docente/*') ? 'active' : '' }}" 
+                               href="#" id="docenteDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-clipboard-check"></i> Mi Asistencia
                             </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->is('docente/asistencia*') ? 'active' : '' }}"
-                                href="{{ route('docente.asistencia') }}">
-                                Asistencia
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->is('docente/historial*') ? 'active' : '' }}"
-                                href="{{ route('docente.historial') }}">
-                                Historial
-                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="docenteDropdown">
+                                <li>
+                                    <a class="dropdown-item {{ request()->is('docente/mi-horario*') ? 'active' : '' }}" 
+                                       href="{{ route('docente.horario') }}">
+                                        <i class="bi bi-calendar-event"></i> Mi Horario
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item {{ request()->is('docente/asistencia*') ? 'active' : '' }}" 
+                                       href="{{ route('docente.asistencia') }}">
+                                        <i class="bi bi-check-circle"></i> Registrar Asistencia
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item {{ request()->is('docente/historial*') ? 'active' : '' }}" 
+                                       href="{{ route('docente.historial') }}">
+                                        <i class="bi bi-clock-history"></i> Historial
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                     @endif
                 </ul>
@@ -110,7 +281,7 @@
                             <li><hr class="dropdown-divider"></li>
                             <li>
                                 <span class="dropdown-item-text small text-muted">
-                                    Rol: {{ Auth::user()->rol->nombre ?? 'Sin rol' }}
+                                    Rol: <strong>{{ Auth::user()->rol->nombre ?? 'Sin rol' }}</strong>
                                 </span>
                             </li>
                             <li><hr class="dropdown-divider"></li>
