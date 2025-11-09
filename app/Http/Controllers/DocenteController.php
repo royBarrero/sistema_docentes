@@ -9,11 +9,15 @@ use Illuminate\Http\Request;
 
 class DocenteController extends Controller
 {
-    public function index()
-    {
-        $docentes = Docente::orderBy('apellidos')->paginate(10);
-        return view('docentes.index', compact('docentes'));
-    }
+   public function index()
+{
+    // Cargar la relación con usuario para acceder al nombre
+    $docentes = Docente::with('usuario')
+                       ->orderBy('ci')
+                       ->paginate(10);
+    
+    return view('docentes.index', compact('docentes'));
+}
 
     public function create()
     {

@@ -32,7 +32,7 @@
                 @foreach ($docentes as $docente)
                     <tr>
                         <td>{{ $docente->ci }}</td>
-                        <td>{{ $docente->nombre }} {{ $docente->apellidos }}</td>
+                     <td>{{ $docente->usuario->nombre_completo ?? 'Sin usuario' }}</td>
                         <td>{{ $docente->usuario->email ?? $docente->correo_institucional }}</td>
                         <td>{{ $docente->titulo }}</td>
                         <td>{{ $docente->especialidad }}</td>
