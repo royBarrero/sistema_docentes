@@ -36,7 +36,7 @@ class UsuarioController extends Controller
         $request->validate([
             'nombre_completo' => 'required|string|max:120',
             'email' => 'required|email|unique:usuarios,email|max:120',
-            'telefono' => 'nullable|string|max:30',
+            'telefono' => 'nullable|numeric|digits_between:7,15',
             'password' => 'required|string|min:8|confirmed',
             'role_id' => 'required|exists:roles,id',
             'estado' => 'required|in:Activo,Inactivo,Suspendido',
@@ -79,7 +79,7 @@ class UsuarioController extends Controller
         $request->validate([
             'nombre_completo' => 'required|string|max:120',
             'email' => ['required', 'email', 'max:120', Rule::unique('usuarios')->ignore($usuario->id)],
-            'telefono' => 'nullable|string|max:30',
+            'telefono' => 'nullable|numeric|digits_between:7,15',
             'password' => 'nullable|string|min:8|confirmed',
             'role_id' => 'required|exists:roles,id',
             'estado' => 'required|in:Activo,Inactivo,Suspendido',

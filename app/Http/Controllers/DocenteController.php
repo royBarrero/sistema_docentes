@@ -33,7 +33,7 @@ class DocenteController extends Controller
     'titulo' => 'nullable|string|max:100',
     'especialidad' => 'nullable|string|max:120',
     'correo_institucional' => 'required|email|unique:docentes,correo_institucional',
-    'telefono' => 'nullable|string|max:30',
+    'telefono' => 'nullable|numeric|digits_between:7,15',
     'estado' => 'required|string|max:20',
 ]);
 
@@ -79,7 +79,7 @@ class DocenteController extends Controller
             'correo_institucional' => 'required|email|unique:docentes,correo_institucional,' . $docente->id,
             'especialidad' => 'nullable|string|max:120',
             'titulo' => 'nullable|string|max:100',
-            'telefono' => 'nullable|string|max:30',
+            'telefono' => 'nullable|numeric|digits_between:7,15',
             'estado' => 'required|string|max:20',
         ]);
 

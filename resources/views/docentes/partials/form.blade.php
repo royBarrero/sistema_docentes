@@ -26,10 +26,20 @@
         <label class="form-label">Especialidad</label>
         <input type="text" name="especialidad" class="form-control" value="{{ old('especialidad', $docente->especialidad ?? '') }}">
     </div>
-    <div class="col-md-6">
-        <label class="form-label">Teléfono</label>
-        <input type="text" name="telefono" class="form-control" value="{{ old('telefono', $docente->telefono ?? '') }}">
-    </div>
+  <div class="col-md-6">
+    <label for="telefono" class="form-label">Teléfono</label>
+    <input type="tel" 
+           name="telefono" 
+           class="form-control @error('telefono') is-invalid @enderror" 
+           value="{{ old('telefono', $docente->telefono ?? '') }}"
+           pattern="[0-9]+" 
+           title="Solo se permiten números"
+           maxlength="15"
+           oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+    @error('telefono')
+        <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+</div>
     <div class="col-md-6">
         <label class="form-label">Estado</label>
         <select name="estado" class="form-select">
