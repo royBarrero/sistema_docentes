@@ -112,7 +112,7 @@
                         <div class="card shadow-sm h-100 border-0 hover-card">
                             <div class="card-body text-center">
                                 <i class="bi bi-calendar3 fs-1 text-primary"></i>
-                                <h5 class="card-title mt-3">Gestiones Académicas</h5>
+                                <h5 class="card-title mt-3">Gestiones </h5>
                                 <p class="card-text text-muted small">Administrar períodos académicos</p>
                                 <a href="{{ route('gestiones.index') }}" class="btn btn-sm btn-outline-primary">
                                     <i class="bi bi-arrow-right-circle"></i> Acceder
