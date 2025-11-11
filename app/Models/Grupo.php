@@ -17,8 +17,21 @@ class Grupo extends Model
         'estado',
     ];
 
+    // Relación con Materia
     public function materia()
     {
         return $this->belongsTo(Materia::class, 'materia_id');
+    }
+
+    // Relación con Horarios
+    public function horarios()
+    {
+        return $this->hasMany(Horario::class, 'grupo_id');
+    }
+
+    // Nombre completo del grupo (ej: "Programación Web - Grupo A")
+    public function getNombreCompletoAttribute()
+    {
+        return $this->materia->nombre . ' - Grupo ' . $this->nombre;
     }
 }
