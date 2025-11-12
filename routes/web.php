@@ -24,19 +24,31 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('materias', App\Http\Controllers\MateriaController::class);
         Route::resource('grupos', App\Http\Controllers\GrupoController::class);
         Route::resource('aulas', App\Http\Controllers\AulaController::class);
-Route::resource('gestiones', App\Http\Controllers\GestionAcademicaController::class);
-Route::get('horarios/asistente/buscar', function() {
-    return response('', 204); // Respuesta vacía sin contenido
-})->name('horarios.asistente.buscar.fallback');
+// Gestiones Académicas
+    Route::resource('gestiones', App\Http\Controllers\GestionAcademicaController::class);
     Route::post('gestiones/{id}/activar', [App\Http\Controllers\GestionAcademicaController::class, 'activar'])->name('gestiones.activar');
+    
+    // 👇 PRIMERO: Rutas específicas de horarios (ANTES del resource)
+    
+    // CU11 - Consultar horario de docentes
+    Route::get('horarios/consultar/docente', [App\Http\Controllers\HorarioController::class, 'consultarDocente'])->name('horarios.consultar.docente');
+    Route::get('horarios/consultar/docente/{docente_id}', [App\Http\Controllers\HorarioController::class, 'verHorarioDocente'])->name('horarios.consultar.ver');
+    
+    // CU09 - Asistente de horarios
     Route::get('horarios/asistente/generar', [App\Http\Controllers\HorarioAsistenteController::class, 'index'])->name('horarios.asistente');
     Route::post('horarios/asistente/buscar', [App\Http\Controllers\HorarioAsistenteController::class, 'buscarOpciones'])->name('horarios.asistente.buscar');
     Route::post('horarios/asistente/aprobar', [App\Http\Controllers\HorarioAsistenteController::class, 'aprobarOpcion'])->name('horarios.asistente.aprobar');
-    Route::resource('horarios', App\Http\Controllers\HorarioController::class);
-    Route::post('horarios/validar-conflicto', [App\Http\Controllers\HorarioController::class, 'validarConflicto'])->name('horarios.validar-conflicto');
-        
-//  NUEVO: Asistente de horarios automático
     
+    // Ruta dummy para evitar error 404
+    Route::get('horarios/asistente/buscar', function() {
+        return response('', 204);
+    })->name('horarios.asistente.buscar.fallback');
+    
+    // Validación de conflictos
+    Route::post('horarios/validar-conflicto', [App\Http\Controllers\HorarioController::class, 'validarConflicto'])->name('horarios.validar-conflicto');
+    
+    // 👇 AL FINAL: Resource de horarios (rutas genéricas)
+    Route::resource('horarios', App\Http\Controllers\HorarioController::class); 
 });
 // ========== RUTAS PARA COORDINADOR ==========
 Route::middleware(['role:Coordinador'])->group(function () {

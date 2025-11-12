@@ -255,4 +255,40 @@ class HorarioController extends Controller
 
         return response()->json(['success' => false, 'conflictos' => $conflictos]);
     }
+    /**
+ * CU11: Mostrar formulario para consultar horario de un docente
+ */
+public function consultarDocente()
+{
+    $docentes = Docente::with('usuario')
+        ->where('estado', 'Activo')
+        ->orderBy('id')
+        ->get();
+
+    return view('horarios.consultar-docente', compact('docentes'));
+}
+
+/**
+ * CU11: Mostrar horario completo de un docente específico
+ */
+public function verHorarioDocente($docente_id)
+{
+    $docente = Docente::with('usuario')->findOrFail($docente_id);
+
+    // Obtener horarios de la gestión activa
+    $horarios = Horario::where('docente_id', $docente->id)
+        ->where('estado', 'Activo')
+        ->with(['grupo.materia', 'aula', 'gestion'])
+        ->whereHas('gestion', function($query) {
+            $query->where('estado', 'Activa');
+        })
+        ->orderBy('dia_semana')
+        ->orderBy('hora_inicio')
+        ->get();
+
+    // Organizar por día de la semana
+    $horariosPorDia = $horarios->groupBy('dia_semana');
+
+    return view('horarios.ver-horario-docente', compact('docente', 'horarios', 'horariosPorDia'));
+}
 }

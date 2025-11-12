@@ -148,7 +148,19 @@
         </div>
     </div>
 </div>
-
+<!-- Tarjeta Consultar Horarios Docentes -->
+<div class="col-12 col-sm-6 col-md-4 col-lg-3">
+    <div class="card shadow-sm h-100 border-0 hover-card">
+        <div class="card-body text-center">
+            <i class="bi bi-person-video3 fs-1 text-warning"></i>
+            <h5 class="card-title mt-3">Consultar Horarios</h5>
+            <p class="card-text text-muted small">Ver horario de docentes</p>
+            <a href="{{ route('horarios.consultar.docente') }}" class="btn btn-sm btn-outline-warning">
+                <i class="bi bi-arrow-right-circle"></i> Acceder
+            </a>
+        </div>
+    </div>
+</div>
        {{-- 📦 Paquete 5: Reportes --}}
 <div class="mb-5">
     <h4 class="mb-3 text-info">
