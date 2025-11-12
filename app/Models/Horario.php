@@ -53,7 +53,13 @@ class Horario extends Model
     {
         return $this->hasMany(Asistencia::class, 'horario_id');
     }
-
+// Método para verificar si ya tiene asistencia hoy
+public function tieneAsistenciaHoy()
+{
+    return $this->asistencias()
+                ->whereDate('fecha', now()->format('Y-m-d'))
+                ->exists();
+}
     // Accessor para nombre del día
     public function getDiaNombreAttribute()
     {

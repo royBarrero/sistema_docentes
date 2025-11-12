@@ -136,18 +136,18 @@
                     </div>
                 
 
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                <div class="card shadow-sm h-100 border-0 hover-card bg-light">
-                    <div class="card-body text-center">
-                        <i class="bi bi-calendar3 fs-1 text-dark"></i>
-                        <h5 class="card-title mt-3">Generar Horarios</h5>
-                        <p class="card-text text-muted small">Crear horarios automáticamente</p>
-                        <button class="btn btn-sm btn-secondary" disabled>
-                            <i class="bi bi-hourglass-split"></i> Próximamente
-                        </button>
-                    </div>
-                </div>
-            </div>
+           <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+    <div class="card shadow-sm h-100 border-0 hover-card">
+        <div class="card-body text-center">
+            <i class="bi bi-magic fs-1 text-info"></i>
+            <h5 class="card-title mt-3">Generar Horarios</h5>
+            <p class="card-text text-muted small">Asistente automático de horarios</p>
+            <a href="{{ route('horarios.asistente') }}" class="btn btn-sm btn-outline-info">
+                <i class="bi bi-arrow-right-circle"></i> Acceder
+            </a>
+        </div>
+    </div>
+</div>
 
        {{-- 📦 Paquete 5: Reportes --}}
 <div class="mb-5">
@@ -300,6 +300,7 @@
             <h4 class="mb-3 text-primary">
                 <i class="bi bi-eye"></i> Consultas
             </h4>
+            
             <div class="row g-4">
                 <div class="col-12 col-sm-6 col-md-4">
                     <div class="card shadow-sm h-100 border-0 hover-card">

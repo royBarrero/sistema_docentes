@@ -25,10 +25,19 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('grupos', App\Http\Controllers\GrupoController::class);
         Route::resource('aulas', App\Http\Controllers\AulaController::class);
 Route::resource('gestiones', App\Http\Controllers\GestionAcademicaController::class);
+Route::get('horarios/asistente/buscar', function() {
+    return response('', 204); // Respuesta vacía sin contenido
+})->name('horarios.asistente.buscar.fallback');
     Route::post('gestiones/{id}/activar', [App\Http\Controllers\GestionAcademicaController::class, 'activar'])->name('gestiones.activar');
+    Route::get('horarios/asistente/generar', [App\Http\Controllers\HorarioAsistenteController::class, 'index'])->name('horarios.asistente');
+    Route::post('horarios/asistente/buscar', [App\Http\Controllers\HorarioAsistenteController::class, 'buscarOpciones'])->name('horarios.asistente.buscar');
+    Route::post('horarios/asistente/aprobar', [App\Http\Controllers\HorarioAsistenteController::class, 'aprobarOpcion'])->name('horarios.asistente.aprobar');
     Route::resource('horarios', App\Http\Controllers\HorarioController::class);
     Route::post('horarios/validar-conflicto', [App\Http\Controllers\HorarioController::class, 'validarConflicto'])->name('horarios.validar-conflicto');
-    });
+        
+//  NUEVO: Asistente de horarios automático
+    
+});
 // ========== RUTAS PARA COORDINADOR ==========
 Route::middleware(['role:Coordinador'])->group(function () {
     // Dashboard
