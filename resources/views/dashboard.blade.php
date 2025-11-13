@@ -161,21 +161,21 @@
         </div>
     </div>
 </div>
-       {{-- 📦 Paquete 5: Reportes --}}
+      {{-- 📦 Paquete 5: Reportes --}}
 <div class="mb-5">
     <h4 class="mb-3 text-info">
         <i class="bi bi-file-earmark-bar-graph"></i> Reportes
     </h4>
     <div class="row g-4">
         <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-            <div class="card shadow-sm h-100 border-0 hover-card bg-light">
+            <div class="card shadow-sm h-100 border-0 hover-card">
                 <div class="card-body text-center">
-                    <i class="bi bi-file-earmark-pdf fs-1 text-info"></i>
+                    <i class="bi bi-file-earmark-pdf fs-1 text-danger"></i>
                     <h5 class="card-title mt-3">Generar Reportes</h5>
                     <p class="card-text text-muted small">Reportes en PDF y Excel</p>
-                    <button class="btn btn-sm btn-secondary" disabled>
-                        <i class="bi bi-hourglass-split"></i> Próximamente
-                    </button>
+                    <a href="{{ route('reportes.index') }}" class="btn btn-sm btn-outline-danger">
+                        <i class="bi bi-arrow-right-circle"></i> Acceder
+                    </a>
                 </div>
             </div>
         </div>
@@ -278,26 +278,26 @@
             </div>
         </div>
 
-        {{-- 📦 Reportes --}}
-        <div class="mb-5">
-            <h4 class="mb-3 text-info">
-                <i class="bi bi-file-earmark-bar-graph"></i> Reportes
-            </h4>
-            <div class="row g-4">
-                <div class="col-12 col-sm-6 col-md-4">
-                    <div class="card shadow-sm h-100 border-0 hover-card">
-                        <div class="card-body text-center">
-                            <i class="bi bi-file-earmark-pdf fs-1 text-info"></i>
-                            <h5 class="card-title mt-3">Reportes Parciales</h5>
-                            <p class="card-text text-muted">Generar reportes operativos</p>
-                            <a href="{{ route('coordinador.reportes') }}" class="btn btn-info">
-                                <i class="bi bi-file-earmark-text"></i> Ver reportes
-                            </a>
-                        </div>
-                    </div>
+        {{-- 📦 Paquete 5: Reportes --}}
+<div class="mb-5">
+    <h4 class="mb-3 text-info">
+        <i class="bi bi-file-earmark-bar-graph"></i> Reportes
+    </h4>
+    <div class="row g-4">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="card shadow-sm h-100 border-0 hover-card">
+                <div class="card-body text-center">
+                    <i class="bi bi-file-earmark-pdf fs-1 text-danger"></i>
+                    <h5 class="card-title mt-3">Generar Reportes</h5>
+                    <p class="card-text text-muted small">Reportes en PDF y Excel</p>
+                   <a href="{{ route('coordinador.reportes.index') }}" class="btn btn-sm btn-outline-danger">
+                        <i class="bi bi-arrow-right-circle"></i> Acceder
+                    </a>
                 </div>
             </div>
         </div>
+    </div>
+</div>
     @endif
 
     {{-- Dashboard para Autoridad --}}
@@ -366,20 +366,25 @@
                     </div>
                 </div>
 
-                <div class="col-12 col-sm-6 col-md-4">
-                    <div class="card shadow-sm h-100 border-0 hover-card">
-                        <div class="card-body text-center">
-                            <i class="bi bi-file-earmark-bar-graph fs-1 text-warning"></i>
-                            <h5 class="card-title mt-3">Reportes</h5>
-                            <p class="card-text text-muted">Generar reportes completos</p>
-                            <a href="{{ route('autoridad.reportes') }}" class="btn btn-warning">
-                                <i class="bi bi-file-earmark-pdf"></i> Ver reportes
-                            </a>
-                        </div>
-                    </div>
+                {{-- 📦 Paquete 5: Reportes --}}
+<div class="mb-5">
+    <h4 class="mb-3 text-info">
+        <i class="bi bi-file-earmark-bar-graph"></i> Reportes
+    </h4>
+    <div class="row g-4">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="card shadow-sm h-100 border-0 hover-card">
+                <div class="card-body text-center">
+                    <i class="bi bi-file-earmark-pdf fs-1 text-danger"></i>
+                    <h5 class="card-title mt-3">Generar Reportes</h5>
+                    <p class="card-text text-muted small">Reportes en PDF y Excel</p>
+                  <a href="{{ route('autoridad.reportes.index') }}" class="btn btn-sm btn-outline-danger">
+                        <i class="bi bi-arrow-right-circle"></i> Acceder
+                    </a>
                 </div>
             </div>
         </div>
+    </div>
     @endif
 
     {{-- Dashboard para Docente --}}

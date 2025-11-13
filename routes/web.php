@@ -49,6 +49,12 @@ Route::middleware(['auth'])->group(function () {
     
     // 👇 AL FINAL: Resource de horarios (rutas genéricas)
     Route::resource('horarios', App\Http\Controllers\HorarioController::class); 
+     // 👇 NUEVO: CU12 - Reportes
+    Route::get('reportes', [App\Http\Controllers\ReporteController::class, 'index'])->name('reportes.index');
+    Route::post('reportes/asistencias-docente', [App\Http\Controllers\ReporteController::class, 'asistenciasPorDocente'])->name('reportes.asistencias.docente');
+    Route::post('reportes/horarios-docente', [App\Http\Controllers\ReporteController::class, 'horariosPorDocente'])->name('reportes.horarios.docente');
+    Route::post('reportes/asistencias-general', [App\Http\Controllers\ReporteController::class, 'asistenciasGeneral'])->name('reportes.asistencias.general');
+    Route::post('reportes/horarios-general', [App\Http\Controllers\ReporteController::class, 'horariosGeneral'])->name('reportes.horarios.general');
 });
 // ========== RUTAS PARA COORDINADOR ==========
 Route::middleware(['role:Coordinador'])->group(function () {
@@ -78,6 +84,12 @@ Route::middleware(['role:Coordinador'])->group(function () {
     
     // Reportes Parciales
     Route::get('/coordinador/reportes', [App\Http\Controllers\CoordinadorController::class, 'reportes'])->name('coordinador.reportes');
+// 👇 NUEVO: CU12 - Reportes
+    Route::get('coordinador/reportes', [App\Http\Controllers\ReporteController::class, 'index'])->name('coordinador.reportes.index');
+    Route::post('coordinador/reportes/asistencias-docente', [App\Http\Controllers\ReporteController::class, 'asistenciasPorDocente'])->name('coordinador.reportes.asistencias.docente');
+    Route::post('coordinador/reportes/horarios-docente', [App\Http\Controllers\ReporteController::class, 'horariosPorDocente'])->name('coordinador.reportes.horarios.docente');
+    Route::post('coordinador/reportes/asistencias-general', [App\Http\Controllers\ReporteController::class, 'asistenciasGeneral'])->name('coordinador.reportes.asistencias.general');
+    Route::post('coordinador/reportes/horarios-general', [App\Http\Controllers\ReporteController::class, 'horariosGeneral'])->name('coordinador.reportes.horarios.general');
 });
 
     // ========== RUTAS PARA AUTORIDAD (SOLO LECTURA) ==========
@@ -94,6 +106,12 @@ Route::middleware(['role:Coordinador'])->group(function () {
         Route::get('/docente/asistencia', [DocenteDashboardController::class, 'asistencia'])->name('docente.asistencia');
         Route::post('/docente/asistencia', [DocenteDashboardController::class, 'guardarAsistencia'])->name('docente.asistencia.guardar');
         Route::get('/docente/historial', [DocenteDashboardController::class, 'historialAsistencia'])->name('docente.historial');
+    // 👇 NUEVO: CU12 - Reportes (solo lectura)
+    Route::get('autoridad/reportes', [App\Http\Controllers\ReporteController::class, 'index'])->name('autoridad.reportes.index');
+    Route::post('autoridad/reportes/asistencias-docente', [App\Http\Controllers\ReporteController::class, 'asistenciasPorDocente'])->name('autoridad.reportes.asistencias.docente');
+    Route::post('autoridad/reportes/horarios-docente', [App\Http\Controllers\ReporteController::class, 'horariosPorDocente'])->name('autoridad.reportes.horarios.docente');
+    Route::post('autoridad/reportes/asistencias-general', [App\Http\Controllers\ReporteController::class, 'asistenciasGeneral'])->name('autoridad.reportes.asistencias.general');
+    Route::post('autoridad/reportes/horarios-general', [App\Http\Controllers\ReporteController::class, 'horariosGeneral'])->name('autoridad.reportes.horarios.general');
     });
 });
 
